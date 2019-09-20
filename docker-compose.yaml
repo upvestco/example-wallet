@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  wallet:
+    image: wallet:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:8000
+    environment:
+      - STATIC_ROOT=/wallet/static/
+      - UPVEST_OAUTH_CLIENT_ID
+      - UPVEST_OAUTH_CLIENT_SECRET
+      - UPVEST_API_KEY_ID
+      - UPVEST_API_KEY_SECRET
+      - UPVEST_API_KEY_PASSPHRASE
+      - UPVEST_BACKEND
+      - ALLOWED_HOSTS
+      - DEBUG
+      - USE_STATSD
+      - STATSD_HOST
+      - STATSD_PORT
