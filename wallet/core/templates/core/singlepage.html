@@ -3,7 +3,25 @@
 
 
 {% block content %}
-{% if user.is_authenticated %}
+{% if not user.is_authenticated %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1>Your Ethereum Ropsten Wallet</h1>
+      <p>
+        Here you can create or access your own wallet to store and transact
+        Etherum Ropsten.
+      </p>
+      <p>
+        <a href="{% url 'account_login' %}">Login</a> if you have a wallet already.
+      </p>
+      <p>
+        If you don't have a wallet, <a href="{% url 'account_signup' %}">register and create one</a>.
+      </p>
+    </div>
+  </div>
+</div>
+{% else %}
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-6">

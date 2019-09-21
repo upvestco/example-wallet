@@ -129,6 +129,6 @@ upvest.yaml
 
 # IDE stuff
 .vscode/
-
+upload.sh
 sqlite3.db
 env.list
