@@ -69,7 +69,7 @@
                   {{ tx.tx.status }}
                 </button>
               </td>
-              <td><a href="https://ropsten.etherscan.io/address/{{ tx.recipient }}">{{ tx.short_recipient }}</a><span class="muted">...</span></td>
+              <td><a href="https://ropsten.etherscan.io/address/{{ tx.tx.recipient }}">{{ tx.short_recipient }}</a><span class="muted">...</span></td>
               <td>{{ tx.formatted_amount }}</td>
               <td>
                 {% if tx.incoming %}

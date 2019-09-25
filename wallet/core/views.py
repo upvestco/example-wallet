@@ -36,12 +36,16 @@ class CreateTransactionForm(forms.Form):
         amount = self.cleaned_data["amount"]
         if amount > self.user.balance:
             raise forms.ValidationError("You don't have enough ETH in your wallet to send that amount")
+        if amount < 0:
+            raise forms.ValidationError("You cannot send a negative amount")
         return amount
 
     def clean_fee(self):
         fee = self.cleaned_data["fee"]
         if fee > self.user.balance:
             raise forms.ValidationError("You don't have enough ETH in your wallet to use that as the fee")
+        if fee <= 0:
+            raise forms.ValidationError("Please add a non-zero fee")
         return fee
 
     def clean_recipient(self):
@@ -67,12 +71,16 @@ class TxDisplay:
         return Decimal(self.tx.quantity) / (10 ** 18)
 
     def short_hash(self):
+        if self.tx.txhash is None:
+            return ''
         return self.tx.txhash[:16]
 
     def button_class(self):
         return {"CONFIRMED": "success", "PENDING": "warning", "CONFIRMING": "info"}.get(self.tx.status, "secondary")
 
     def short_recipient(self):
+        if self.tx.recipient is None:
+            return ''
         return self.tx.recipient[:16]
 
     def incoming(self):
